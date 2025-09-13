@@ -1,0 +1,301 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>La Mesa Redonda</title>
+    <meta name="description" content="">
+    
+    <!-- Estilos principales -->
+    <style>
+        /* === Estilos generales === */
+        body {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+            background: #f9fafb;
+            color: #1f2937;
+        }
+
+        /* === Layout principal === */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* === Sidebar fija a la izquierda === */
+        .sidebar {
+            width: 0 0 20%;                 /* ancho inicial */
+            background: #111827;
+            color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;              /* fija en la parte izquierda */
+            top: 0;
+            left: 0;
+            height: 100vh;                /* ocupa toda la altura */
+        }
+
+        .sidebar .logo {
+            max-width: 160px;
+            margin-bottom: 20px;
+        }
+        .sidebar .nav a {
+            display: block;
+            padding: 10px 0;
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .sidebar .nav a:hover {
+            color: #ffffff;
+        }
+        .sidebar .contact {
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+        .sidebar .socials a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #d1d5db;
+            text-decoration: none;
+        }
+        .sidebar .socials a:hover {
+            color: #ffffff;
+        }
+
+        /* === Main (contenido principal) === */
+        .main {
+            margin-left: 0 0 20%;           /* mismo ancho que sidebar */
+            flex: 1;
+            padding: 20px;
+        }
+        .app-header {
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        /* === Productos === */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            align-items: start;     /* todos alineados arriba */
+        }
+        
+        /* Tarjetas de producto */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .card h3 {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+        .card .cta {
+            margin-top: auto;
+            padding: 10px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .card .cta:hover {
+            background: #1d4ed8;
+        }
+
+        /* === Footer === */
+        .site-footer {
+            margin-top: 30px;
+            padding: 15px 0;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* === Responsivo === */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main {
+                margin-left: 200px;
+            }
+        }
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 160px;
+                padding: 15px;
+            }
+            .main {
+                margin-left: 160px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+    <!-- BOTÓN hamburguesa (solo visible en móvil) -->
+    <div style="display:flex; width:100%; justify-content:flex-start; padding:6px 20px;">
+        <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" aria-expanded="false">☰ Menú</button>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        
+            <div style="font-weight:800; font-size:1.25rem;">La Mesa Redonda</div>
+        
+
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#acerca">Acerca</a>
+        </nav>
+
+        <div class="contact" id="contacto">
+            <div><strong>Tel:</strong> <a href="tel:+34123456789" style="color:inherit;">+34123456789</a></div>
+            <div><strong>Email:</strong> <a href="mailto:info@mitienda.com" style="color:inherit;">info@mitienda.com</a></div>
+            
+            <div class="socials" aria-label="Redes sociales">
+                <a href="https://facebook.com/tu_cuenta" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://instagram.com/tu_cuenta" target="_blank" rel="noopener">Instagram</a>
+                
+                
+            </div>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="main" role="main">
+        <header class="app-header">
+            <h1>La Mesa Redonda</h1>
+        </header>
+
+        <!-- Productos -->
+        <section id="productos">
+            
+            <div class="productos-grid">
+                
+                <article class="card" role="article" aria-label="Cabin Max Manhattan Stowaway">
+                    <img src="https://m.media-amazon.com/images/I/81c6qF9P3wL._AC_SY679_.jpg" alt="Cabin Max Manhattan Stowaway" loading="lazy" width="160" height="160">
+                    <h3>Cabin Max Manhattan Stowaway</h3>
+                    <p style="margin:8px 0; color:#64707a; font-size:0.95rem;"></p>
+                    <a class="cta" href="https://www.amazon.it/dp/B07K4FGLMS" target="_blank" rel="noopener noreferrer">Ver en Amazon</a>
+                </article>
+                
+                <article class="card" role="article" aria-label="Auriculares Sony WH-1000XM5">
+                    <img src="https://m.media-amazon.com/images/I/61d6m6Qk-ML._AC_SX679_.jpg" alt="Auriculares Sony WH-1000XM5" loading="lazy" width="160" height="160">
+                    <h3>Auriculares Sony WH-1000XM5</h3>
+                    <p style="margin:8px 0; color:#64707a; font-size:0.95rem;"></p>
+                    <a class="cta" href="https://www.amazon.it/dp/B09XS7JWHH" target="_blank" rel="noopener noreferrer">Ver en Amazon</a>
+                </article>
+                
+            </div>
+            
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>&copy; 2025 La Mesa Redonda. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+</div>
+
+<!-- Scripts -->
+<script>
+(function(){
+    // === Responsive Menu ===
+    function applyResponsive() {
+        const btn = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        if (window.innerWidth <= 900) {
+            btn.style.display = 'block';
+            if (!sidebar.classList.contains('open')) sidebar.classList.remove('open');
+        } else {
+            btn.style.display = 'none';
+            sidebar.classList.remove('open');
+        }
+    }
+    window.addEventListener('resize', applyResponsive);
+    applyResponsive();
+
+    window.toggleSidebar = function() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+        const btn = document.getElementById('menuToggle');
+        btn.setAttribute("aria-expanded", sidebar.classList.contains('open'));
+    };
+
+    // === Amazon Affiliate Tags ===
+    const affiliateTags = {
+        "amazon.es": "TU_TAG_ES-21",
+        "amazon.com": "TU_TAG_US-20",
+        "amazon.it": "TU_TAG_IT-21",
+        "amazon.de": "TU_TAG_DE-21",
+        "amazon.fr": "TU_TAG_FR-21",
+        "amazon.co.uk": "TU_TAG_UK-21",
+        "amazon.ca": "TU_TAG_CA-20"
+    };
+
+    function getAmazonDomain() {
+        const lang = navigator.language || "en";
+        if (lang.startsWith("es")) return "amazon.es";
+        if (lang.startsWith("it")) return "amazon.it";
+        if (lang.startsWith("de")) return "amazon.de";
+        if (lang.startsWith("fr")) return "amazon.fr";
+        if (lang.startsWith("en-GB")) return "amazon.co.uk";
+        if (lang.startsWith("en-US") || lang.startsWith("en")) return "amazon.com";
+        if (lang.startsWith("ca")) return "amazon.ca";
+        return "amazon.com";
+    }
+
+    function applyAffiliateTags() {
+        const domain = getAmazonDomain();
+        const tag = affiliateTags[domain] || affiliateTags["amazon.com"];
+        document.querySelectorAll(".cta").forEach(link => {
+            try {
+                let url = new URL(link.href);
+                url.hostname = domain;
+                url.searchParams.delete("tag");
+                url.searchParams.set("tag", tag);
+                link.href = url.toString();
+            } catch (e) {
+                console.warn("No se pudo procesar el link:", link.href);
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", applyAffiliateTags);
+})();
+</script>
+</body>
+</html>
+
+
+
+<!-- =======================
+         Notas rápidas sobre la plantilla
+
+Está preparada para Jinja2. Tu generator.py la renderizará pasando variables: site_name, logo_url, telefono, email, facebook, instagram, twitter, whatsapp, productos (lista de dicts), current_year.
+
+Las tarjetas usan p.imagen_local si el generador descarga imágenes a assets/ — si no, usa p.imagen (URL remota). Esto hace la plantilla flexible.
+         ======================= -->
